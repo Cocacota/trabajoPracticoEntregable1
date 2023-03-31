@@ -3,7 +3,7 @@ include "tpEntregable1.php";
 
 function entreNumeros($a,$b){
     do{
-        echo "Ingrese un número: ";
+        echo "Ingrese un número: \n";
         $n = trim(fgets(STDIN));
     } while($n < $a || $n > $b);
     return $n;
