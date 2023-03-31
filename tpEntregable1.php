@@ -37,7 +37,7 @@ class viaje{
         $mensaje="pasajero no encontrado \n";
         $i=0;
         do{
-            if($p->documento==$this->getPasajeros()[$i]["documento"]){
+            if($p["documento"]==$this->getPasajeros()[$i]["documento"]){
                 $this->pasajeros[$i]=$p;
                 $cambio=false;
                 $mensaje="pasajero modificado\n";
