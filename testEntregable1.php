@@ -1,12 +1,22 @@
 <?php
 include "tpEntregable1.php";
 
-function entreNumeros($a,$b){
+function entreNumeros($a,$b){//verifica si esta ingresando un numero entre los esperados
     do{
         echo "Ingrese un número: \n";
         $n = trim(fgets(STDIN));
     } while($n < $a || $n > $b);
     return $n;
+}
+function crearPasajero(){//genera un arreglo con los datos que ingresa del pasajero
+    echo "Ingrese el documento del pasajero: ";
+    $documento = trim(fgets(STDIN));
+    echo "Ingrese el nombre del pasajero: ";
+    $nombre = trim(fgets(STDIN));
+    echo "Ingrese el apellido del pasajero: ";
+    $apellido = trim(fgets(STDIN));
+    $pas = ["documento"=>$documento, "nombre"=>$nombre, "apellido"=>$apellido];
+    return $pas;
 }
 
 $fin = true;
@@ -41,24 +51,10 @@ do {
             $cole->setMaxPasajeros($max);
             break;
         case 4:
-            echo "Ingrese el documento del pasajero: ";
-            $documento = trim(fgets(STDIN));
-            echo "Ingrese el nombre del pasajero: ";
-            $nombre = trim(fgets(STDIN));
-            echo "Ingrese el apellido del pasajero: ";
-            $apellido = trim(fgets(STDIN));
-            $pas = ["documento"=>$documento, "nombre"=>$nombre, "apellido"=>$apellido];
-            echo $cole->cargarPasajero($pas);
+            echo $cole->cargarPasajero(crearPasajero());
             break;
-        case 5:
-            echo "Ingrese el documento del pasajero: ";
-            $documento = trim(fgets(STDIN));
-            echo "Ingrese el nombre del pasajero: ";
-            $nombre = trim(fgets(STDIN));
-            echo "Ingrese el apellido del pasajero: ";
-            $apellido = trim(fgets(STDIN));
-            $pas = ["documento"=>$documento, "nombre"=>$nombre, "apellido"=>$apellido];
-            echo $cole->modificarPasajero($pas);
+        case 5: 
+            echo $cole->modificarPasajero(crearPasajero());
             break;
         case 6:
             echo $cole->__toString();
