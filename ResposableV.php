@@ -38,6 +38,6 @@ class ResponsableV{
     }
     public function __toString()
     {
-        return"nombre ". $this->getNombre() . " apellido " .$this->getApellido(). " numero de documento ".$this->getNroEmpleado(). "telefono ".$this->getNroLicencia(). "\n";
+        return"nombre ". $this->getNombre() . " apellido " .$this->getApellido(). " numero de documento ".$this->getNroEmpleado(). " telefono ".$this->getNroLicencia(). "\n";
     }
 }

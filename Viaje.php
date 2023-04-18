@@ -1,6 +1,5 @@
 <?php
-include "Pasajero.php";
-include "ResposableV.php";
+
 class viaje{
     private  $codigo;
     private  $destino;
@@ -71,7 +70,7 @@ class viaje{
                 $i++;
             }
             if(!$encontro){
-            $this->getpasajeros()[]=$p;
+            $this->pasajeros[]=$p;
             $mensaje="pasajero cargado \n";
             }
         }else{
@@ -84,6 +83,6 @@ class viaje{
         for($i=0;$i<count($this->getPasajeros());$i++){
             $mensaje= $mensaje . $this->getPasajeros()[$i] ."\n";
         }
-        return "codigo del viaje ". $this->getCodigo(). " destino: ". $this->getDestino(). " pasajeros Maximos ". $this->getMaxPasajeros(). $mensaje."\n";
+        return "codigo del viaje ". $this->getCodigo(). " destino: ". $this->getDestino(). " pasajeros Maximos ". $this->getMaxPasajeros()." responsable del viaje:\n ". $this->getResponsable() ."\n". $mensaje."\n";
     }
 }

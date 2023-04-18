@@ -1,7 +1,8 @@
 <?php
 include "Viaje.php";
-include "Pasajero.php";
 include "ResposableV.php";
+include "Pasajero.php";
+
 
 function entreNumeros($a,$b){//verifica si esta ingresando un numero entre los esperados
     do{
@@ -10,17 +11,6 @@ function entreNumeros($a,$b){//verifica si esta ingresando un numero entre los e
     } while($n < $a || $n > $b);
     return $n;
 }
-function crearPasajero(){//genera un arreglo con los datos que ingresa del pasajero
-    echo "Ingrese el documento del pasajero: ";
-    $documento = trim(fgets(STDIN));
-    echo "Ingrese el nombre del pasajero: ";
-    $nombre = trim(fgets(STDIN));
-    echo "Ingrese el apellido del pasajero: ";
-    $apellido = trim(fgets(STDIN));
-    $pas = ["documento"=>$documento, "nombre"=>$nombre, "apellido"=>$apellido];
-    return $pas;
-}
-
 $fin = false;
 $cole = new viaje();
 
@@ -64,7 +54,7 @@ do {
             $telefono=trim(fgets(STDIN));
             $pas = new Pasajero($nombre,$apellido,$documento,$telefono);
             echo $cole->cargarPasajero($pas);
-            echo $cole->cargarPasajero(crearPasajero());
+            
             break;
         case 5:
             echo "Ingrese el documento del pasajero: ";
@@ -77,9 +67,8 @@ do {
             $telefono=trim(fgets(STDIN));
             $pas = new Pasajero($nombre,$apellido,$documento,$telefono);
             echo $cole->modificarPasajero($pas);
-        case 5: 
-            echo $cole->modificarPasajero(crearPasajero());
             break;
+        
         case 6:
             echo "ingrese el nombre del responsable\n";
             $nombre=trim(fgets(STDIN));
@@ -91,6 +80,7 @@ do {
             $nroEm=trim(fgets(STDIN));
             $res=new ResponsableV($nroEm,$nroLi,$nombre,$apellido);
             $cole->setResponsable($res);
+            break;
         case 7:
             echo $cole->__toString();
             break;
