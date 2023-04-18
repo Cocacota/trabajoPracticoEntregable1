@@ -1,4 +1,6 @@
 <?php
+include "Pasajero.php";
+include "ResposableV.php";
 class viaje{
     private  $codigo;
     private  $destino;
@@ -33,26 +35,37 @@ class viaje{
     }
     public function modificarPasajero($p){
         //$p array
-        $cambio=true;
+        $cambio=false;
         $mensaje="pasajero no encontrado \n";
         $i=0;
         do{
-            if($p["documento"]==$this->getPasajeros()[$i]["documento"]){
+            if($p->getNroDocumento()==$this->getPasajeros()[$i]->getNroDocumento()){
                 $this->pasajeros[$i]=$p;
-                $cambio=false;
+                $cambio=true;
                 $mensaje="pasajero modificado\n";
             }
             $i++;
-        }while($i<count($this->getPasajeros())&&$cambio);
+        }while($i<count($this->getPasajeros())&&!$cambio);
         
         return $mensaje;
     }
     public function cargarPasajero($p){
-            //$p array
+            //$p objeto 
             $mensaje="";
+            $i=0;
+            $encontro=false;
         if(count( $this->getPasajeros())<$this->getMaxPasajeros()){
-            $this->pasajeros[count( $this->getPasajeros())]=$p;
+            while($i<count( $this->getPasajeros())&&!$encontro){
+                if($this->getPasajeros()[$i]->getNroDocumento()==$p->getNroDocumento()){
+                    $encontro=true;
+                    $mensaje="pasajero cargado anteriormente \n";
+                }
+                $i++;
+            }
+            if(!$encontro){
+            $this->getpasajeros()[]=$p;
             $mensaje="pasajero cargado \n";
+            }
         }else{
             $mensaje="maximos pasajeros \n";
         }
@@ -61,7 +74,7 @@ class viaje{
     public function __toString(){
         $mensaje="pasajeros del viaje \n";
         for($i=0;$i<count($this->getPasajeros());$i++){
-            $mensaje= $mensaje . "documento: ". $this->getPasajeros()[$i]["documento"]." nombre: ". $this->getPasajeros()[$i]["nombre"]. " apellido: ". $this->getPasajeros()[$i]["apellido"]."\n";
+            $mensaje= $mensaje . $this->getPasajeros()[$i] ."\n";
         }
         return "codigo del viaje ". $this->getCodigo(). " destino: ". $this->getDestino(). " pasajeros Maximos ". $this->getMaxPasajeros(). $mensaje."\n";
     }

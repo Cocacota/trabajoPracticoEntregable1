@@ -1,5 +1,7 @@
 <?php
-include "tpEntregable1.php";
+include "Viaje.php";
+include "Pasajero.php";
+include "ResposableV.php";
 
 function entreNumeros($a,$b){
     do{
@@ -9,7 +11,7 @@ function entreNumeros($a,$b){
     return $n;
 }
 
-$fin = true;
+$fin = false;
 $cole = new viaje();
 
 do {
@@ -19,10 +21,11 @@ do {
     echo "3. Cargar los pasajeros máximos del viaje.\n";
     echo "4. Cargar los datos de un pasajero.\n";
     echo "5. Modificar los datos de un pasajero.\n";
-    echo "6. Mostrar los datos del viaje.\n";
-    echo "7. Salir.\n";
+    echo "6. cargar el responsable del viaje.\n";
+    echo "7. Mostrar los datos del viaje.\n";
+    echo "8. Salir.\n";
     
-    $opcion = entreNumeros(1,7);
+    $opcion = entreNumeros(1,8);
 
     switch($opcion){
         case 1:
@@ -47,7 +50,9 @@ do {
             $nombre = trim(fgets(STDIN));
             echo "Ingrese el apellido del pasajero: ";
             $apellido = trim(fgets(STDIN));
-            $pas = ["documento"=>$documento, "nombre"=>$nombre, "apellido"=>$apellido];
+            echo "Ingrese el telefono del pasajero: ";
+            $telefono=trim(fgets(STDIN));
+            $pas = new Pasajero($nombre,$apellido,$documento,$telefono);
             echo $cole->cargarPasajero($pas);
             break;
         case 5:
@@ -57,16 +62,29 @@ do {
             $nombre = trim(fgets(STDIN));
             echo "Ingrese el apellido del pasajero: ";
             $apellido = trim(fgets(STDIN));
-            $pas = ["documento"=>$documento, "nombre"=>$nombre, "apellido"=>$apellido];
+            echo "Ingrese el telefono del pasajero: ";
+            $telefono=trim(fgets(STDIN));
+            $pas = new Pasajero($nombre,$apellido,$documento,$telefono);
             echo $cole->modificarPasajero($pas);
             break;
         case 6:
+            echo "ingrese el nombre del responsable\n";
+            $nombre=trim(fgets(STDIN));
+            echo "ingrese el apellido del reponsable\n";
+            $apellido=trim(fgets(STDIN));
+            echo "ingrese el numero de licencia del responsable\n";
+            $nroLi=trim(fgets(STDIN));
+            echo "ingrese el numero de empleado del responsable\n";
+            $nroEm=trim(fgets(STDIN));
+            $res=new ResponsableV($nroEm,$nroLi,$nombre,$apellido);
+            $cole->setResponsable($res);
+        case 7:
             echo $cole->__toString();
             break;
-        case 7:
-            $fin=false;
+        case 8:
+            $fin=true;
             break;
     }
-} while($fin);
+} while(!$fin);
 
 ?>
