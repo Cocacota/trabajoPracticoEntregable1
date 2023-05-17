@@ -28,7 +28,9 @@ class PasajeroEspecial extends Pasajero{
         }elseif($this->getSillaRueda()){
             $importe=$importe*1.15;
         }
-        $importe= parent::incrementoImporte($importe);
+        if($this->getVuelta()){
+            $importe= $importe*1.5;
+        }
         return $importe;
     }
 }

@@ -37,6 +37,7 @@ class Pasajero{
         $this->vuelta=$v;
     }
     public function incrementoImporte($importe){
+        $importe=$importe*1.1;
         if($this->getVuelta()){
             $importe= $importe*1.5;
         }
