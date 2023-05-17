@@ -6,12 +6,14 @@ class viaje{
     private  $maxPasajeros;
     private  $pasajeros;
     private $responsable;
-    public function __construct(){
-        $this->codigo=0 ;
-        $this->destino="";
-        $this->maxPasajeros=0;
-        $this->pasajeros=[];
-        $this->responsable=null;
+    private $importe;
+    public function __construct($cod,$d,$maxP,$ps,$respo,$impo){
+        $this->codigo=$cod ;
+        $this->destino=$d;
+        $this->maxPasajeros=$maxP;
+        $this->pasajeros=$ps;
+        $this->responsable=$respo;
+        $this->importe=$impo;
     }
     public function getCodigo(){
         return $this->codigo;
@@ -25,8 +27,14 @@ class viaje{
     public function getPasajeros(){
         return $this->pasajeros;
     }
+    public function getImporte(){
+        return $this->importe;
+    }
     public function setCodigo($codigo){
         $this->codigo=$codigo;
+    }
+    public function setImporte($impo){
+        $this->importe=$impo;
     }
     public function setDestino($destino){
         $this->destino=$destino;
@@ -77,6 +85,20 @@ class viaje{
             $mensaje="maximos pasajeros \n";
         }
         return $mensaje;
+    }
+    public function hayPasajeDisponible(){
+        return $this->getMaxPasajeros()>=count($this->getPasajeros());
+    }
+    public function venderPasaje($pasajero){
+        if($this->hayPasajeDisponible()){
+            $impo=$this->getImporte();
+            $impo=$pasajero->incrementoImporte($impo);
+            $this->setImporte($impo);
+            $men="el pasaje esta disponible, el importe es de ".$impo."\n";
+        }else{
+            $men="no esta disponible el pasaje \n";
+        }
+        return $men;
     }
     public function __toString(){
         $mensaje="pasajeros del viaje \n";

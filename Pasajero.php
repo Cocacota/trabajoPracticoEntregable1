@@ -2,42 +2,48 @@
 //pasajeros sean un objeto que tenga los atributos nombre, apellido, numero de documento y teléfono.
 class Pasajero{
     private $nombre;
-    private $apellido;
-    private $nroDocumento;
-    private $telefono;
-    public function __construct($nom,$ap,$nroD,$t)
+    private $nroAsiento;
+    private $nroTicket;
+    private $vuelta;
+    public function __construct($nom,$nroA,$nrot,$v)
     {
         $this->nombre=$nom;
-        $this->apellido=$ap;
-        $this->nroDocumento=$nroD;
-        $this->telefono=$t;
+        $this->nroAsiento=$nroA;
+        $this->nroTicket=$nrot;
+        $this->vuelta=$v;
     }
-    public function getNroDocumento(){
-        return $this->nroDocumento;
+    public function getNroAsiento(){
+        return $this->nroAsiento;
     }
-    public function getTelefono(){
-        return $this->telefono;
+    public function getNroTicket(){
+        return $this->nroTicket;
     }
     public function getNombre(){
         return $this->nombre;
     }
-    public function getApellido(){
-        return $this->apellido;
+    public function setNroAsiento($nroA){
+        $this->nroAsiento=$nroA;
     }
-    public function setNroDocumento($nroD){
-        $this->nroDocumento=$nroD;
-    }
-    public function setTelefono($t){
-        $this->telefono=$t;
+    public function getVuelta(){
+        return $this->vuelta;
     }
     public function setNombre($nom){
         $this->nombre=$nom;
     }
-    public function setApellido($ap){
-        $this->apellido=$ap;
+    public function setNroTicket($nroT){
+        $this->nroTicket=$nroT;
+    }
+    public function setVuelta($v){
+        $this->vuelta=$v;
+    }
+    public function incrementoImporte($importe){
+        if($this->getVuelta()){
+            $importe= $importe*1.5;
+        }
+        return $importe;
     }
     public function __toString()
     {
-        return "nombre ". $this->getNombre() . " apellido " .$this->getApellido(). " numero de documento ".$this->getNroDocumento(). " telefono ".$this->getTelefono(). "\n";
+        return "nombre ". $this->getNombre() . " numero asiento " .$this->getNroAsiento(). " numero de ticket ".$this->getNroTicket() . "pasaje de vuelta" . $this->getVuelta() . "\n";
     }
 }
